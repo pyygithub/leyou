@@ -49,13 +49,19 @@
             <version>${mysql.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.thtf.service</groupId>
             <artifactId>ly-item-interface</artifactId>
             <version>${leyou.latest.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>com.thtf.common</groupId>
+            <artifactId>ly-common</artifactId>
+            <version>${leyou.latest.version}</version>
         </dependency>
+
     </dependencies>
 </project>
