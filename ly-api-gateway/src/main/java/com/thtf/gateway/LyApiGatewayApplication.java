@@ -1,4 +1,4 @@
-package com.thtf.common;
+package com.thtf.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
