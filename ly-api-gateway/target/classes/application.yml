@@ -25,6 +25,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMillisecond: 5000 # 熔断超时时长：5000ms
+#cors配置
+cors:
+  max-age: 3600
+  allowed-origin:
+    - http://manage.leyou.com
 
 #网关配置
 zuul:

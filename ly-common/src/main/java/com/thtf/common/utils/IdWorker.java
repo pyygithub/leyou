@@ -157,6 +157,12 @@ public class IdWorker {
         }
         return id;
     }
-
-
+    /** 测试 */
+    public static void main(String[] args) {
+        IdWorker idWorker = new IdWorker(0, 0);
+        for (int i = 0; i < 100; i++) {
+            long id = idWorker.nextId();
+            System.out.println(id);
+        }
+    }
 }
