@@ -61,4 +61,15 @@ public class BrandServiceImpl implements BrandService {
         return new PageResult(page.getTotal(), (long)page.getPages(), brandList);
     }
 
+    /**
+     * 新增品牌
+     * @param brand
+     * @param cids
+     * @return
+     */
+    @Override
+    public void saveBrand(Brand brand, List<Long> cids) {
+
+    }
+
 }

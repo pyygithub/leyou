@@ -3,6 +3,8 @@ package com.thtf.item.service;
 import com.thtf.common.vo.PageResult;
 import com.thtf.item.model.Brand;
 
+import java.util.List;
+
 /**
  * @Description:品牌service接口
  * @Author: panyangyang
@@ -10,5 +12,7 @@ import com.thtf.item.model.Brand;
  */
 public interface BrandService {
 
-    public PageResult<Brand> queryBrandByPageAndSort(Integer pageNum, Integer rows, String sortBy, Boolean desc, String keyword);
+    PageResult<Brand> queryBrandByPageAndSort(Integer pageNum, Integer rows, String sortBy, Boolean desc, String keyword);
+
+    void saveBrand(Brand brand, List<Long> cids);
 }
