@@ -17,7 +17,10 @@ public enum ExceptionEnums {
     BAD_REQUEST_PARAMETER(400, "请求参数错误"),
     CATEGORY_NOT_FOUND(404, "商品分类没查询到！"),
     BRAND_NOT_FOUND(404, "品牌列表没查询到！"),
-    BRAND_SAVE_ERROR(500, "新增品牌失败")
+    BRAND_SAVE_ERROR(500, "新增品牌失败"),
+    UPLOAD_IMAGE_FAIL(500, "图片上传失败"),
+    INVALID_FILE_TYPE(400, "上传失败,文件类型不匹配"),
+    INVALID_FILE_CONTENT(400, "上传失败,文件内容不符合要求"),
     ;
     private int code;
     private String msg;
