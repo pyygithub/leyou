@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -32,10 +33,14 @@ public class BrandServiceImpl implements BrandService {
 
     /**
      * 品牌列表分页模糊查询加排序
-     * @Author: PanYangYang
-     * @Date: 2019/5/20 16:21
-     * @Param: [pageNum, rows, sortBy, desc, keyword]
-     * @Return: com.thtf.common.vo.PageResult<com.thtf.item.model.Brand>
+     * @author: pyy
+     * @date: 2019/5/23 8:55
+     * @param pageNum
+     * @param rows
+     * @param sortBy
+     * @param desc
+     * @param keyword
+     * @return: com.thtf.common.vo.PageResult<com.thtf.item.model.Brand>
      */
     public PageResult<Brand> queryBrandByPageAndSort(Integer pageNum, Integer rows, String sortBy, Boolean desc, String keyword) {
         // 分页
@@ -59,6 +64,35 @@ public class BrandServiceImpl implements BrandService {
         }
 
         return new PageResult(page.getTotal(), (long)page.getPages(), brandList);
+    }
+
+    /**
+     * 品牌新增
+     * @author: pyy
+     * @date: 2019/5/23 8:55
+     * @param brand
+     * @param cids
+     * @return: void
+     */
+    @Transactional
+    @Override
+    public void saveBrand(Brand brand, List<Long> cids) {
+        // 新增品牌
+        brand.setId(null);
+        int count = brandMapper.insert(brand);
+        if (count != 1) {
+            log.error("###新增品牌失败###");
+            throw new CommonException(ExceptionEnums.BRAND_SAVE_ERROR);
+        }
+        // 新增中间表 品牌和分类关系表
+        for (Long cid : cids) {
+            count = brandMapper.insertCategoryBrand(cid, brand.getId());
+            if (count != 1) {
+                log.error("###新增品牌分类中间表失败###");
+                throw new CommonException(ExceptionEnums.BRAND_SAVE_ERROR);
+            }
+        }
+
     }
 
 }

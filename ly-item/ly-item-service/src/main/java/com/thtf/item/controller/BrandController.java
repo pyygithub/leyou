@@ -4,11 +4,11 @@ import com.thtf.common.vo.PageResult;
 import com.thtf.item.model.Brand;
 import com.thtf.item.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Description:品牌Controller
@@ -22,12 +22,17 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
+
     /**
      * 品牌数据分页模糊查询
-     * @Author: PanYangYang
-     * @Date: 2019/5/20 16:53
-     * @Param: [pageNum, rows, sortBy, desc, keyword]
-     * @Return: org.springframework.http.ResponseEntity<com.thtf.common.vo.PageResult<com.thtf.item.model.Brand>>
+     * @author: pyy
+     * @date: 2019/5/23 8:53
+     * @param pageNum
+     * @param rows
+     * @param sortBy
+     * @param desc
+     * @param keyword
+     * @return: org.springframework.http.ResponseEntity<com.thtf.common.vo.PageResult<com.thtf.item.model.Brand>>
      */
     @GetMapping("/list")
     public ResponseEntity<PageResult<Brand>> queryBrandByPage(
@@ -38,5 +43,19 @@ public class BrandController {
             @RequestParam(value = "keyword", required = false) String keyword ) {
         PageResult<Brand> result = brandService.queryBrandByPageAndSort(pageNum, rows, sortBy, desc, keyword);
         return ResponseEntity.ok(result);
-    };
+    }
+
+    /**
+     * 品牌添加
+     * @author: pyy
+     * @date: 2019/5/23 8:54
+     * @param brand
+     * @param cids
+     * @return: org.springframework.http.ResponseEntity<java.lang.Void>
+     */
+    @PostMapping
+    public ResponseEntity<Void> saveBrand(Brand brand, @RequestParam("cids") List<Long> cids) {
+        brandService.saveBrand(brand, cids);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 }
