@@ -22,7 +22,6 @@ public class BrandController {
     @Autowired
     private BrandService brandService;
 
-
     /**
      * 品牌数据分页模糊查询
      * @author: pyy
